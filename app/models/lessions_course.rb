@@ -1,0 +1,2 @@
+class LessionsCourse < ApplicationRecord
+end
