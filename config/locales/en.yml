@@ -1,0 +1,21 @@
+en:
+  hello: "Hello world"
+  answers:
+    answer_content: "Answer content"
+  courses:
+    course_content: "Course content"
+  home:
+    e_learning: "E-Learning"
+    home: "Home"
+  layouts:
+    login: "Login"
+    sign_in: "Sign In"
+  lessions:
+    lession_content: "Lession content"
+  questions:
+    question_content: "Question content"
+  tasks:
+    title: "Title"
+  users:
+    name: "Name"
+
