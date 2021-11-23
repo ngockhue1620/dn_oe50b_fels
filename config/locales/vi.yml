@@ -10,6 +10,7 @@ vi:
   layouts:
     login: "Đăng nhập"
     sign_in: "Đăng ký"
+    logout: "Đăng xuất"
   lessions:
     lession_content: "Lession content"
   questions:
@@ -18,3 +19,5 @@ vi:
     title: "Title"
   users:
     name: "Name"
+  mess:
+    sign_in_success: "Đăng ký tài khoản thành công!"

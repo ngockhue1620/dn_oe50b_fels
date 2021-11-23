@@ -12,32 +12,32 @@
 
 ActiveRecord::Schema.define(version: 2021_11_22_040544) do
 
-  create_table "answers", force: :cascade do |t|
+  create_table "answers", charset: "latin1", force: :cascade do |t|
     t.string "content"
     t.boolean "is_right"
-    t.integer "questions_id", null: false
+    t.bigint "questions_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["questions_id"], name: "index_answers_on_questions_id"
   end
 
-  create_table "courses", force: :cascade do |t|
+  create_table "courses", charset: "latin1", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "lessions", force: :cascade do |t|
+  create_table "lessions", charset: "latin1", force: :cascade do |t|
     t.string "name"
     t.integer "duration"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "lessions_courses", force: :cascade do |t|
-    t.integer "courses_id", null: false
-    t.integer "lessions_id", null: false
+  create_table "lessions_courses", charset: "latin1", force: :cascade do |t|
+    t.bigint "courses_id", null: false
+    t.bigint "lessions_id", null: false
     t.integer "time_learn"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -45,25 +45,25 @@ ActiveRecord::Schema.define(version: 2021_11_22_040544) do
     t.index ["lessions_id"], name: "index_lessions_courses_on_lessions_id"
   end
 
-  create_table "questions", force: :cascade do |t|
+  create_table "questions", charset: "latin1", force: :cascade do |t|
     t.string "content"
     t.integer "type"
-    t.integer "lessions_id", null: false
+    t.bigint "lessions_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["lessions_id"], name: "index_questions_on_lessions_id"
   end
 
-  create_table "tasks", force: :cascade do |t|
+  create_table "tasks", charset: "latin1", force: :cascade do |t|
     t.string "title"
     t.string "description"
-    t.integer "lessions_id", null: false
+    t.bigint "lessions_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["lessions_id"], name: "index_tasks_on_lessions_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", charset: "latin1", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "user_name"
@@ -74,9 +74,9 @@ ActiveRecord::Schema.define(version: 2021_11_22_040544) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "users_courses", force: :cascade do |t|
-    t.integer "courses_id", null: false
-    t.integer "users_id", null: false
+  create_table "users_courses", charset: "latin1", force: :cascade do |t|
+    t.bigint "courses_id", null: false
+    t.bigint "users_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["courses_id"], name: "index_users_courses_on_courses_id"

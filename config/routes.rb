@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  root "home#index"
-  resources :users_courses
-  resources :lessions_courses
+  root "home#new"
+  post '/login', to: 'home#create'
+  delete '/logout', to: 'home#destroy'
   resources :answers
   resources :questions
   resources :tasks
