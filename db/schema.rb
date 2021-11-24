@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2021_11_22_040544) do
 
-  create_table "answers", charset: "latin1", force: :cascade do |t|
+  create_table "answers", charset: "utf8", force: :cascade do |t|
     t.string "content"
     t.boolean "is_right"
     t.bigint "questions_id", null: false
@@ -21,21 +21,21 @@ ActiveRecord::Schema.define(version: 2021_11_22_040544) do
     t.index ["questions_id"], name: "index_answers_on_questions_id"
   end
 
-  create_table "courses", charset: "latin1", force: :cascade do |t|
+  create_table "courses", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "lessions", charset: "latin1", force: :cascade do |t|
+  create_table "lessions", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.integer "duration"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "lessions_courses", charset: "latin1", force: :cascade do |t|
+  create_table "lessions_courses", charset: "utf8", force: :cascade do |t|
     t.bigint "courses_id", null: false
     t.bigint "lessions_id", null: false
     t.integer "time_learn"
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 2021_11_22_040544) do
     t.index ["lessions_id"], name: "index_lessions_courses_on_lessions_id"
   end
 
-  create_table "questions", charset: "latin1", force: :cascade do |t|
+  create_table "questions", charset: "utf8", force: :cascade do |t|
     t.string "content"
     t.integer "type"
     t.bigint "lessions_id", null: false
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 2021_11_22_040544) do
     t.index ["lessions_id"], name: "index_questions_on_lessions_id"
   end
 
-  create_table "tasks", charset: "latin1", force: :cascade do |t|
+  create_table "tasks", charset: "utf8", force: :cascade do |t|
     t.string "title"
     t.string "description"
     t.bigint "lessions_id", null: false
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 2021_11_22_040544) do
     t.index ["lessions_id"], name: "index_tasks_on_lessions_id"
   end
 
-  create_table "users", charset: "latin1", force: :cascade do |t|
+  create_table "users", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "user_name"
@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 2021_11_22_040544) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "users_courses", charset: "latin1", force: :cascade do |t|
+  create_table "users_courses", charset: "utf8", force: :cascade do |t|
     t.bigint "courses_id", null: false
     t.bigint "users_id", null: false
     t.datetime "created_at", precision: 6, null: false

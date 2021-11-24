@@ -6,6 +6,7 @@ vi:
     course_content: "Course content"
     courses: "Khóa Học"
     create: "Tạo Khóa Học"
+    not_found: "Khóa Học không tồn tại"
   home:
     e_learning: "E-Learning"
     home: "Trang chủ"

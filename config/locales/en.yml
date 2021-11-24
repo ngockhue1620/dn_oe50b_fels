@@ -6,6 +6,7 @@ en:
     course_content: "Course content"
     courses: "Courses"
     create: "Create courses"
+    not_found: "Course was not found"
   home:
     e_learning: "E-Learning"
     home: "Home"
