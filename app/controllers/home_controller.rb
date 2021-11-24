@@ -1,4 +1,7 @@
 class HomeController < ApplicationController
+
+  def index; end
+
   def new
     @user = User.new
   end
@@ -8,7 +11,7 @@ class HomeController < ApplicationController
     puts(@user.name)
     if @user && @user.authenticate(login_params[:password])
       login_in @user
-      redirect_to @user
+      redirect_to courses_path
     else
       flash.now[:danger] = 'Invalid email/password combination'
       render root_url
