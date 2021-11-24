@@ -8,3 +8,6 @@
 .homeELearning {
     width: 100%;
 }
+.listCourses {
+    display: flex;
+}

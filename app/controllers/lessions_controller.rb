@@ -3,17 +3,35 @@ class LessionsController < ApplicationController
     @lessions = Lession.all
   end
 
-  def show; end
+  def show
+    @lession = Lession.find_by(id: params[:id])
+    if @lession.present?
+      redirect_to @lession
+    else
+      flash[:warning] = t "courses.not_found"
+    end
+  end
 
   def new
     @lession = Lession.new
   end
 
-  def edit; end
+  def edit
+    @lession = Lession.find_by(id: params[:id])
+    return  @lession
+  end
 
   def create; end
 
-  def update; end
+  def update
+    @lession = Lession.find_by(id: params[:id])
+
+    if @lession.update(lession_params)
+      redirect_to @lession
+    else
+      render :edit
+    end
+  end
 
   def destroy; end
 
@@ -24,6 +42,6 @@ class LessionsController < ApplicationController
   end
 
   def lession_params
-    params.require(:lession).permit(:name)
+    params.require(:lession).permit(:name, :description, :image, :duration)
   end
 end

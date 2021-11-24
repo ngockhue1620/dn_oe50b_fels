@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_22_040544) do
+ActiveRecord::Schema.define(version: 2021_11_25_034352) do
 
   create_table "answers", charset: "utf8", force: :cascade do |t|
     t.string "content"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2021_11_22_040544) do
     t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "image"
   end
 
   create_table "lessions", charset: "utf8", force: :cascade do |t|
@@ -33,16 +34,18 @@ ActiveRecord::Schema.define(version: 2021_11_22_040544) do
     t.integer "duration"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "image"
+    t.string "description"
   end
 
   create_table "lessions_courses", charset: "utf8", force: :cascade do |t|
-    t.bigint "courses_id", null: false
-    t.bigint "lessions_id", null: false
+    t.bigint "course_id", null: false
+    t.bigint "lession_id", null: false
     t.integer "time_learn"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["courses_id"], name: "index_lessions_courses_on_courses_id"
-    t.index ["lessions_id"], name: "index_lessions_courses_on_lessions_id"
+    t.index ["course_id"], name: "index_lessions_courses_on_course_id"
+    t.index ["lession_id"], name: "index_lessions_courses_on_lession_id"
   end
 
   create_table "questions", charset: "utf8", force: :cascade do |t|
@@ -57,10 +60,10 @@ ActiveRecord::Schema.define(version: 2021_11_22_040544) do
   create_table "tasks", charset: "utf8", force: :cascade do |t|
     t.string "title"
     t.string "description"
-    t.bigint "lessions_id", null: false
+    t.bigint "lession_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["lessions_id"], name: "index_tasks_on_lessions_id"
+    t.index ["lession_id"], name: "index_tasks_on_lession_id"
   end
 
   create_table "users", charset: "utf8", force: :cascade do |t|
@@ -84,10 +87,10 @@ ActiveRecord::Schema.define(version: 2021_11_22_040544) do
   end
 
   add_foreign_key "answers", "questions", column: "questions_id"
-  add_foreign_key "lessions_courses", "courses", column: "courses_id"
-  add_foreign_key "lessions_courses", "lessions", column: "lessions_id"
+  add_foreign_key "lessions_courses", "courses"
+  add_foreign_key "lessions_courses", "lessions"
   add_foreign_key "questions", "lessions", column: "lessions_id"
-  add_foreign_key "tasks", "lessions", column: "lessions_id"
+  add_foreign_key "tasks", "lessions"
   add_foreign_key "users_courses", "courses", column: "courses_id"
   add_foreign_key "users_courses", "users", column: "users_id"
 end

@@ -1,3 +1,4 @@
 class UsersCourse < ApplicationRecord
-  attr_accessor :password
+  belongs_to :user
+  belongs_to :course
 end

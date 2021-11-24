@@ -1,16 +1,41 @@
 <div class="container">
-  <div style="margin-top: 2rem">
-  <p>
-    <strong>Name:</strong>
-    <%= @course&.name %>
-  </p>
-  <p>
-    <strong>Description:</strong>
-    <%= @course&.description %>
-  </p>
+  <div style="margin-top: 2rem; display: flex">
+    <div class="card" style="width: 18rem; margin: 2rem">
+      <img class="card-img-top" src="<%= @course.image %>" alt="Card image cap" style="height: 180px">
+      <div class="card-body">
+        <h5 class="card-title"><%= @course.name %></h5>
+        <p class="card-text"><%= @course.description %></p>
+      </div>
+      <div style="display: flex; justify-content: space-around">
+        <%= link_to 'Show', @course %>
+        <%= link_to 'Edit', edit_course_path(@course) %>
+        <%= link_to 'Destroy', @course, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </div>
+    </div>
+    <% if @course&.lessions.size > 0 %>
+      <div style="margin: 2rem">
+        <table>
+          <thead>
+            <th>Tên bài Học</th>
+            <th>Thời gian học</th>
+          </thead>
+          <tbody>
+          <% @course.lessions.each do |lession| %>
+            <tr>
+              <td><%= lession.name %></td>
+              <td><%= lession.duration %></td>
+              <td><%= link_to 'Show', lession %></td>
+              <td><%= link_to 'Edit', edit_lession_path(lession) %></td>
+              <td><%= link_to 'Destroy', lession, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+  </div>
   <% if @course.present? %>
     <%= link_to 'Edit', edit_course_path(@course) %> |
     <%= link_to 'Back', courses_path %>
   <% end %>
-  </div>
 </div>
