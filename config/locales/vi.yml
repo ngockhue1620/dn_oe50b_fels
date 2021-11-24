@@ -4,12 +4,17 @@ vi:
     answer_content: "Answer content"
   courses:
     course_content: "Course content"
+    courses: "Khóa Học"
+    create: "Tạo Khóa Học"
   home:
     e_learning: "E-Learning"
     home: "Trang chủ"
+    e_learning_desctiption: "E Learning Hấp dẩn mê say thấy ngay kết quả"
+    e_learning_desctiption_2: "E-Learning vừa học vừa lag"
   layouts:
     login: "Đăng nhập"
     sign_in: "Đăng ký"
+    logout: "Đăng xuất"
   lessions:
     lession_content: "Lession content"
   questions:
@@ -18,3 +23,5 @@ vi:
     title: "Title"
   users:
     name: "Name"
+  mess:
+    sign_in_success: "Đăng ký tài khoản thành công!"
