@@ -1,4 +1,4 @@
-en:
+vi:
   hello: "Hello world"
   answers:
     answer_content: "Answer content"
@@ -6,10 +6,10 @@ en:
     course_content: "Course content"
   home:
     e_learning: "E-Learning"
-    home: "Home"
+    home: "Trang chủ"
   layouts:
-    login: "Login"
-    sign_in: "Sign In"
+    login: "Đăng nhập"
+    sign_in: "Đăng ký"
   lessions:
     lession_content: "Lession content"
   questions:
@@ -18,4 +18,3 @@ en:
     title: "Title"
   users:
     name: "Name"
-
