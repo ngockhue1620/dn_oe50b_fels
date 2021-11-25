@@ -4,12 +4,17 @@ en:
     answer_content: "Answer content"
   courses:
     course_content: "Course content"
+    courses: "Courses"
+    create: "Create courses"
   home:
     e_learning: "E-Learning"
     home: "Home"
+    e_learning_desctiption: "E Learning Hấp dẩn mê say thấy ngay kết quả"
+    e_learning_desctiption_2: "E-Learning vừa học vừa lag"
   layouts:
     login: "Login"
     sign_in: "Sign In"
+    logout: "LogOut"
   lessions:
     lession_content: "Lession content"
   questions:
@@ -18,4 +23,6 @@ en:
     title: "Title"
   users:
     name: "Name"
+  mess:
+    sign_in_success: "Sing in success!"
 
