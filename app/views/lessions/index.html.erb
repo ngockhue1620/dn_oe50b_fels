@@ -1,0 +1,21 @@
+<table>
+  <thead>
+    <tr>
+      <th><%= t "lessions.name" %></th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @lessions.each do |lession| %>
+      <tr>
+        <td><%= lession.name %></td>
+        <td><%= link_to t("action.show"), lession %></td>
+        <td><%= link_to t("action.edit"), edit_lession_path(lession) %></td>
+        <td><%= link_to t("action.delete"), lession, method: :delete, data: { confirm: t("mess.sure") } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t("lessions.new"), new_lession_path %>

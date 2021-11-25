@@ -1,0 +1,19 @@
+<div class="container listCourses">
+    <% @courses.each do |course| %>
+      <div class="card" style="width: 18rem; margin: 2rem">
+        <img class="card-img-top" src="<%= course.image %>" alt="Card image cap" style="height: 180px">
+        <div class="card-body">
+          <h5 class="card-title"><%= course.name %></h5>
+          <p class="card-text"><%= course.description %></p>
+        </div>
+        <div style="display: flex; justify-content: space-around">
+          <%= link_to t("action.show"), course %>
+          <%= link_to t("action.edit"), edit_course_path(course) %>
+          <%= link_to t("action.delete"), course, method: :delete, data: { confirm: t("mess.sure") } %>
+        </div>
+      </div>
+    <% end %>
+</div>
+<br>
+<%= will_paginate %>
+<%= link_to t("courses.new"), new_course_path, class: "btn " %>

@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Fels</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track": "reload" %>
-    <%= javascript_pack_tag "application", "data-turbolinks-track": "reload" %>
-  </head>
+<head>
+  <title><%= t "home.e_learning_desctiption" %></title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag "application", media: "all" , "data-turbolinks-track": "reload" %>
+  <%#= javascript_pack_tag "application" , "data-turbolinks-track": "reload" %>
+</head>
 
-  <body>
-    <div class="controller">
-      <%= render 'layouts/header' %>
-      <%= yield %>
-    </div>
-  </body>
+<body>
+  <div class="controller">
+    <%= render 'layouts/header' %>
+    <% flash.each do |message_type, message| %>
+      <div class="alert alert-<%= message_type %>"><%= message %></div>
+    <% end %>
+    <%= yield %>
+  </div>
+</body>
 </html>

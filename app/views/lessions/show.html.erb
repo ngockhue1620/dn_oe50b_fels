@@ -1,0 +1,7 @@
+<% if @lession.present? %>
+  <p>
+    <strong><%= t "lessions.name" %>:</strong>
+    <%= @lession&.name %>
+  </p>
+  <%= link_to t("action.edit"), edit_lession_path(@lession) %>
+<% end %>
