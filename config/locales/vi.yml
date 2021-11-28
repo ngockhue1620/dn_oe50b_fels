@@ -26,3 +26,4 @@ vi:
     name: "Name"
   mess:
     sign_in_success: "Đăng ký tài khoản thành công!"
+    have_error: "Có lỗi xảy ra"

@@ -6,7 +6,7 @@ class LessionsController < ApplicationController
   def show
     @lession = Lession.find_by(id: params[:id])
     if @lession.present?
-      redirect_to @lession
+      @lession
     else
       flash[:warning] = t "courses.not_found"
     end
@@ -21,7 +21,15 @@ class LessionsController < ApplicationController
     return  @lession
   end
 
-  def create; end
+  def create
+    @lession = Lession.new(lession_params)
+    if @lession.save
+      redirect_to @lession
+    else
+      flash[:danger] = t "me"
+      render :new
+    end
+  end
 
   def update
     @lession = Lession.find_by(id: params[:id])
