@@ -17,7 +17,9 @@ vi:
     sign_in: "Đăng ký"
     logout: "Đăng xuất"
   lessions:
+    lession: "Bài Học"
     lession_content: "Lession content"
+    not_found: "Lession không tồn tại"
   questions:
     question_content: "Question content"
   tasks:
@@ -27,3 +29,9 @@ vi:
   mess:
     sign_in_success: "Đăng ký tài khoản thành công!"
     have_error: "Có lỗi xảy ra"
+    success: "Thành công"
+  action:
+    show: "Chi tiết"
+    edit: "Cập nhập"
+    delete: "Xóa"
+    add: "Thêm"

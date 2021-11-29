@@ -1,16 +1,42 @@
 <% if @lession.present? %>
 <div class="container">
   <div style="display: flex">
-    <div class="card" style="width: 18rem;">
-      <img class="card-img-top" src="<%= @lession.image %>" alt="Card image cap">
-      <div class="card-body">
-        <p class="card-title"><strong>Tên bài học: </strong><%= @lession.name %></p>
-        <p class="card-text"><strong>Thời gian hoàn thành: </strong><%= @lession.duration %></p>
-        <p class="card-text"><strong>Mô tả: </strong><%= @lession.description %></p>
+    <div>
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="<%= @lession.image %>" alt="Card image cap">
+        <div class="card-body">
+          <p class="card-title"><strong>Tên bài học: </strong><%= @lession.name %></p>
+          <p class="card-text"><strong>Thời gian hoàn thành: </strong><%= @lession.duration %></p>
+          <p class="card-text"><strong>Mô tả: </strong><%= @lession.description %></p>
+        </div>
+      </div>
+      <div id="addTask" style="display: none">
+        <%= form_for :task,  url: {action: :create, controller: :tasks} do |form| %>
+          <div class="form-group">
+            <%= form.label :title %>
+            <%= form.text_field  :title, class: "form-control", :required => true %>
+          </div>
+          <div class="form-group">
+            <%= form.label :description %>
+            <%= form.text_field  :description, class: "form-control", :required => true %>
+          </div>
+          <%= form.hidden_field  :lession_id, value: @lession.id %>
+          <div class="actions" style="display: flex; justify-content: space-between">
+            <%= form.submit t("action.add"), class: "btn btn-primary" %>
+            <span class="btn btn-primary" onclick="closeForm()" id="closeForm">Đóng</span>
+          </div>
+
+        <% end %>
+
       </div>
     </div>
-    <div style="margin-left: 10rem">
+    <div style="margin-left: 10rem; width: 100%">
+      <div style="display: flex; justify-content: space-between">
         <strong>Các Nhiện vụ của bài học</strong>
+      <div style="display: flex; justify-content: flex-end">
+        <button onclick="showFormAddTask()" id="addButton" class="btn btn-primary"><%= t "action.add" %></button>
+      </div>
+      </div>
       <% if @lession&.tasks.size == 0 %>
         <div class="alert alert-warning" role="alert">
           chưa có nhiện vụ nào cho bài học này
@@ -32,35 +58,15 @@
         </table>
 
       <% end %>
-      <div style="display: flex; justify-content: flex-end">
-        <button onclick="showFormAddTask()" id="addButton">Thêm Task</button>
-      </div>
-      <div id="addTask" style="display: none">
-        <%= form_for :task,  url: {action: :create, controller: :tasks} do |form| %>
-          <div class="form-group">
-            <%= form.label :title %>
-            <%= form.text_field  :title, class: "form-control", :required => true %>
-          </div>
-          <div class="form-group">
-            <%= form.label :description %>
-            <%= form.text_field  :description, class: "form-control", :required => true %>
-          </div>
-            <%= form.hidden_field  :lession_id, value: @lession.id %>
-          <div class="actions">
-            <%= form.submit "Thêm task", class: "btn btn-primary" %>
 
-          </div>
 
-        <% end %>
-        <button class="btn btn-primary" onclick="closeForm()" id="closeForm">Đóng</button>
-      </div>
 
     </div>
   </div>
 </div>
 
-<%= link_to 'Edit', edit_lession_path(@lession) %> |
-<%= link_to 'Back', lessions_path %>
+<!--<%#= link_to 'Edit', edit_lession_path(@lession) %> |-->
+<%#= link_to 'Back', lessions_path %>
 <% end %>
 <script>
     function showFormAddTask (){

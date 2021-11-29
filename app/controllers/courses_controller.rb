@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
   def index
-    @courses = Course.all
+    @courses = Course.paginate(:page => params[:page], :per_page => 6)
   end
 
   def show
@@ -18,7 +18,11 @@ class CoursesController < ApplicationController
 
   def edit
     @course = Course.find_by(id: params[:id])
-    return  @course
+    if @course.present?
+      @course
+    else
+      flash[:warning] = t "courses.not_found"
+    end
   end
 
   def create
@@ -40,13 +44,23 @@ class CoursesController < ApplicationController
     end
   end
 
-  def destroy; end
+  def destroy
+    @course = Course.find_by(id: params[:id])
+    if @course.present?
+      if @course.delete
+        flash[:success] =  t "mess.success"
+        redirect_to courses_path
+      else
+        flash[:danger] = t "mess.have_error"
+        redirect_to courses_path
+      end
+    else
+      flash[:danger] = t "courses.not_found"
+      redirect_to courses_path
+    end
+  end
 
   private
-
-  def set_course
-    @course = Course.find(params[:id])
-  end
 
   def course_params
     params.require(:course).permit(:name, :description, :image)

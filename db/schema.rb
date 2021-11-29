@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_25_034352) do
+ActiveRecord::Schema.define(version: 2021_11_24_092903) do
 
   create_table "answers", charset: "utf8", force: :cascade do |t|
     t.string "content"
     t.boolean "is_right"
-    t.bigint "questions_id", null: false
+    t.bigint "question_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["questions_id"], name: "index_answers_on_questions_id"
+    t.index ["question_id"], name: "index_answers_on_question_id"
   end
 
   create_table "courses", charset: "utf8", force: :cascade do |t|
@@ -51,10 +51,10 @@ ActiveRecord::Schema.define(version: 2021_11_25_034352) do
   create_table "questions", charset: "utf8", force: :cascade do |t|
     t.string "content"
     t.integer "type"
-    t.bigint "lessions_id", null: false
+    t.bigint "lession_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["lessions_id"], name: "index_questions_on_lessions_id"
+    t.index ["lession_id"], name: "index_questions_on_lession_id"
   end
 
   create_table "tasks", charset: "utf8", force: :cascade do |t|
@@ -78,19 +78,19 @@ ActiveRecord::Schema.define(version: 2021_11_25_034352) do
   end
 
   create_table "users_courses", charset: "utf8", force: :cascade do |t|
-    t.bigint "courses_id", null: false
-    t.bigint "users_id", null: false
+    t.bigint "course_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["courses_id"], name: "index_users_courses_on_courses_id"
-    t.index ["users_id"], name: "index_users_courses_on_users_id"
+    t.index ["course_id"], name: "index_users_courses_on_course_id"
+    t.index ["user_id"], name: "index_users_courses_on_user_id"
   end
 
-  add_foreign_key "answers", "questions", column: "questions_id"
+  add_foreign_key "answers", "questions"
   add_foreign_key "lessions_courses", "courses"
   add_foreign_key "lessions_courses", "lessions"
-  add_foreign_key "questions", "lessions", column: "lessions_id"
+  add_foreign_key "questions", "lessions"
   add_foreign_key "tasks", "lessions"
-  add_foreign_key "users_courses", "courses", column: "courses_id"
-  add_foreign_key "users_courses", "users", column: "users_id"
+  add_foreign_key "users_courses", "courses"
+  add_foreign_key "users_courses", "users"
 end

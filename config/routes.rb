@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :questions
   resources :tasks
   resources :lessions
+  resources :lessions_courses
   resources :courses
   resources :users
   resources :home

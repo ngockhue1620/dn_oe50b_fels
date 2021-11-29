@@ -8,13 +8,16 @@
           <p class="card-text"><%= course.description %></p>
         </div>
         <div style="display: flex; justify-content: space-around">
-          <%= link_to 'Show', course %>
-          <%= link_to 'Edit', edit_course_path(course) %>
-          <%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to t("action.show"), course %>
+          <%= link_to t("action.edit"), edit_course_path(course) %>
+          <%= link_to t("action.delete"), course, method: :delete, data: { confirm: "#{course.name} sẽ bị xóa" } %>
         </div>
       </div>
+
     <% end %>
 </div>
+<div class="pagination">
+  <%= will_paginate @courses, :container => false %>
+</div>
 <br>
-
 <%= link_to 'New Course', new_course_path, class: "btn " %>

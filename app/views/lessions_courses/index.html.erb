@@ -1,27 +1,79 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Lessions Courses</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @lessions_courses.each do |lessions_course| %>
+<div class="d-flex justify-content-between">
+  <div>
+    <h3><%= t "courses.courses" %></h3>
+    <div class="card" style="width: 18rem">
+      <img class="card-img-top" src="<%= @course.image %>" alt="Card image cap" style="height: 180px">
+      <div class="card-body">
+        <h5 class="card-title"><%= @course.name %></h5>
+        <p class="card-text"><%= @course.description %></p>
+      </div>
+      <div style="display: flex; justify-content: space-around">
+        <%= link_to t('action.show'), @course %>
+        <%= link_to t('action.edit'), edit_course_path(@course) %>
+        <%= link_to t("action.delete"), @course, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </div>
+    </div>
+  </div>
+  <div>
+    <h3>Bài học hiên tại</h3>
+    <table class="table-bordered">
+      <thead>
       <tr>
-        <td><%= lessions_course.title %></td>
-        <td><%= link_to 'Show', lessions_course %></td>
-        <td><%= link_to 'Edit', edit_lessions_course_path(lessions_course) %></td>
-        <td><%= link_to 'Destroy', lessions_course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th></th>
+        <th>Tên</th>
+        <th>Thời gian học</th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+      </thead>
 
-<br>
+      <tbody>
+      <% @course.lessions.each do |lession| %>
+        <tr >
+          <td class="old"> <img style="width: 50px;" src=" <%= lession.image %>"></td>
+          <td class="old"><%= lession.name %></td>
+          <td class="old"><%= lession.duration %> ngày</td>
+          <td>
+            <%= form_for :lessions_course,  url: {action: :create, controller: :lessions_courses} do |form| %>
+              <%= form.hidden_field  :action, value: 'delete' %>
+              <%= form.hidden_field  :lession_id, value: lession.id %>
+              <%= form.hidden_field  :course_id, value: @course.id %>
+              <button type="submit" class="btn btn-outline-danger" ><%= t "action.delete" %></button>
+            <% end %>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <h3><%= t "lessions.lession" %></h3>
+    <table class="table-bordered">
+      <thead>
+      <tr>
+        <th></th>
+        <th>Tên</th>
+        <th>Thời gian học</th>
+        <th></th>
+      </tr>
+      </thead>
 
-<%= link_to 'New Lessions Course', new_lessions_course_path %>
+      <tbody>
+      <% @lessions.each do |lession| %>
+        <tr>
+          <td> <img style="width: 50px;" src=" <%= lession.image %>"></td>
+          <td id="<%= lession.id %>"><%= lession.name %></td>
+          <td><%= lession.duration %> ngày</td>
+          <td>
+            <%= form_for :lessions_course,  url: {action: :create, controller: :lessions_courses} do |form| %>
+              <%= form.hidden_field  :action, value: 'add' %>
+              <%= form.hidden_field  :lession_id, value: lession.id %>
+              <%= form.hidden_field  :course_id, value: @course.id %>
+              <button type="submit" class="btn btn-outline-success" ><%= t "action.add" %></button>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <%= will_paginate @lessions%>
+  </div>
+</div>

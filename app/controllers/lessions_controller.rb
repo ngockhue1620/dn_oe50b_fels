@@ -1,6 +1,6 @@
 class LessionsController < ApplicationController
   def index
-    @lessions = Lession.all
+    @lessions = Lession.paginate(page: params[:page], :per_page => 6)
   end
 
   def show
@@ -8,7 +8,7 @@ class LessionsController < ApplicationController
     if @lession.present?
       @lession
     else
-      flash[:warning] = t "courses.not_found"
+      flash[:warning] = t "lessions.not_found"
     end
   end
 
@@ -18,7 +18,12 @@ class LessionsController < ApplicationController
 
   def edit
     @lession = Lession.find_by(id: params[:id])
-    return  @lession
+    if @lession.present?
+      @lession
+    else
+      flash[:danger] = t "mess.have_error"
+      redirect_to root_url
+    end
   end
 
   def create
@@ -26,7 +31,7 @@ class LessionsController < ApplicationController
     if @lession.save
       redirect_to @lession
     else
-      flash[:danger] = t "me"
+      flash[:danger] = t "mess.have_error"
       render :new
     end
   end
@@ -41,7 +46,21 @@ class LessionsController < ApplicationController
     end
   end
 
-  def destroy; end
+  def destroy
+    @lession = Lession.find_by(id: params[:id])
+    if @lession.present?
+      if @lession.destroy
+        flash[:success] =  t "mess.success"
+        redirect_to lessions_path
+      else
+        flash[:danger] = t "mess.have_error"
+        redirect_to lessions_path
+      end
+    else
+      flash[:danger] = t "lessions.not_found"
+      redirect_to lessions_path
+    end
+  end
 
   private
 
