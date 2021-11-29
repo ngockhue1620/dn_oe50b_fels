@@ -7,6 +7,8 @@ vi:
     courses: "Khóa Học"
     create: "Tạo Khóa Học"
     not_found: "Khóa Học không tồn tại"
+    not_have: "Bạn chưa có khóa học nào"
+    is_exists: "Khóa học này đã được đăng ký"
   home:
     e_learning: "E-Learning"
     home: "Trang chủ"
@@ -22,10 +24,13 @@ vi:
     not_found: "Lession không tồn tại"
   questions:
     question_content: "Question content"
+    new_question: "Thêm mới câu hỏi"
   tasks:
     title: "Title"
   users:
     name: "Name"
+    learn_now: "Học ngay"
+    courses: "Khóa Học Của Bạn"
   mess:
     sign_in_success: "Đăng ký tài khoản thành công!"
     have_error: "Có lỗi xảy ra"

@@ -1,16 +1,5 @@
 <div class="container">
   <%= form_with(model: lession) do |form| %>
-    <% if lession.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(course.errors.count, "error") %> prohibited this course from being saved:</h2>
-
-        <ul>
-          <% lession.errors.each do |error| %>
-            <li><%= error.full_message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
     <div class="form-group">
       <%= form.label :name %>
       <%= form.text_field :name, class: "form-control", :required => true %>

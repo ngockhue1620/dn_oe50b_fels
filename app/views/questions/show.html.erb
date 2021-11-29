@@ -1,9 +1,71 @@
-<p id="notice"><%= notice %></p>
+<div class="d-flex">
+  <div>
+    <% if @questions.present? %>
+      cos
+    <% else %>
+      khong co
+    <% end %>
+  </div>
+  <div>
+    <%= form_for :question,  url: {action: :create, controller: :questions} do |form| %>
+      <div class="form-group">
+        <%= form.label :content %>
+        <%= form.text_field  :content, class: "form-control", :required => true %>
+      </div>
+        <%= form.hidden_field  :type, value: 1, class: "form-control" %>
+        <%= form.hidden_field  :lession_id, value: @lession.id %>
+      <div id="answers">
 
-<p>
-  <strong>Title:</strong>
-  <%= @question.title %>
-</p>
+      </div>
+      <div class="actions" style="display: flex; justify-content: space-between">
+        <%= form.submit t("action.add"), class: "btn btn-primary" %>
 
-<%= link_to 'Edit', edit_question_path(@question) %> |
-<%= link_to 'Back', questions_path %>
+        <span class="btn btn-primary" onclick="openForm()" id="closeForm">Them caau tra loi</span>
+      </div>
+    <% end %>
+  </div>
+  <div style="width: 500px; display: none" id="formAddAnswer">
+    <div class="d-flex" style="margin: 1rem">
+      <span style="width: 200px">Noi dung:</span>
+      <input class="form-control" required="required" type="text" id="answerItem">
+    </div>
+    <div>
+      <button class="btn btn-primary" onclick="addAnsswer()">Them</button>
+    </div>
+  </div>
+</div>
+<script>
+
+   var answers = []
+   function openForm() {
+       document.getElementById("formAddAnswer").style.display = "block"
+       document.getElementById('answerItem').value = ''
+   }
+   function  addAnsswer () {
+       const answerContent = document.getElementById('answerItem').value
+       answers.push({
+           id: answers.length,
+           content: answerContent,
+           right: false,
+       })
+       document.getElementById("formAddAnswer").style.display = "none"
+       showAnswer()
+   }
+  function answerItem(e) {
+       return `
+        <div class="d-flex" style="margin: 1rem">
+            <input type="radio" name="right" value="${e.id}">
+            <input type="hidden" name="answer[]" value="${e.content}">
+            <strong>${String.fromCharCode(65 + e.id)} .</strong>
+            <p>${e.content}</p>
+        </div>
+       `
+  }
+  function showAnswer() {
+       let view = ""
+      answers.forEach(e =>{
+          view += answerItem(e)
+      })
+      document.getElementById('answers').innerHTML = view
+  }
+</script>

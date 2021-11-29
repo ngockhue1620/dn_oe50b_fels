@@ -47,7 +47,7 @@ class CoursesController < ApplicationController
   def destroy
     @course = Course.find_by(id: params[:id])
     if @course.present?
-      if @course.delete
+      if @course.destroy
         flash[:success] =  t "mess.success"
         redirect_to courses_path
       else

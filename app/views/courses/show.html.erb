@@ -8,7 +8,10 @@
           <p class="card-text"><%= @course.description %></p>
         </div>
         <div style="display: flex; justify-content: space-around">
-          <%= link_to t('action.show'), @course %>
+          <%= form_for :users_course, url: {action: :create, controller: :users_courses} do |form|%>
+            <%= form.hidden_field :course_id,  value: @course.id %>
+            <%= form.submit t("users.learn_now"), class: "btn btn-outline-primary" %>
+          <% end %>
           <%= link_to t('action.edit'), edit_course_path(@course) %>
           <%= link_to t("action.delete"), @course, method: :delete, data: { confirm: 'Are you sure?' } %>
         </div>

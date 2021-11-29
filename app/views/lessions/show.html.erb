@@ -9,6 +9,10 @@
           <p class="card-text"><strong>Thời gian hoàn thành: </strong><%= @lession.duration %></p>
           <p class="card-text"><strong>Mô tả: </strong><%= @lession.description %></p>
         </div>
+        <div class="card-footer">
+          <p>Có <%= @lession.questions.size %> Câu hỏi cho bìa học này</p>
+          <%= link_to t("question.new_question"), question_path(@lession), class: 'btn btn-primary' %>
+        </div>
       </div>
       <div id="addTask" style="display: none">
         <%= form_for :task,  url: {action: :create, controller: :tasks} do |form| %>
@@ -30,7 +34,7 @@
 
       </div>
     </div>
-    <div style="margin-left: 10rem; width: 100%">
+    <div style="margin-left: 10rem; width: 100%" id="list_task">
       <div style="display: flex; justify-content: space-between">
         <strong>Các Nhiện vụ của bài học</strong>
       <div style="display: flex; justify-content: flex-end">
