@@ -20,8 +20,24 @@ class QuestionsController < ApplicationController
   def edit; end
 
   def create
-    @answers = params.require(:answer)
-    puts(@answers)
+    # transaction
+    @add_question = Question.new(
+      content: question_params[:content],
+      typeQuestion: question_params[:typeQuestion].to_i,
+      lession_id: question_params[:lession_id]
+    )
+
+    if @add_question.save
+      puts(question_params[:answers])
+      question_params[:answers].each_with_index { |content, index|
+        if index == question_params[:right]
+          Answer.create(content: content, is_right: true, question_id: @add_question.id)
+        else
+          Answer.create(content: content, is_right: false, question_id: @add_question.id)
+        end
+      }
+    end
+    redirect_to "/lessions/#{question_params[:lession_id]}"
   end
 
   def update; end
@@ -35,6 +51,6 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:content, :type, :answer, :right)
+    params.require(:question).permit(:content, :typeQuestion, :right, :lession_id, answers: [ ])
   end
 end

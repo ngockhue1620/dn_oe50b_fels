@@ -12,7 +12,7 @@
         <%= form.label :content %>
         <%= form.text_field  :content, class: "form-control", :required => true %>
       </div>
-        <%= form.hidden_field  :type, value: 1, class: "form-control" %>
+        <%= form.hidden_field  :typeQuestion, value: 1, class: "form-control" %>
         <%= form.hidden_field  :lession_id, value: @lession.id %>
       <div id="answers">
 
@@ -54,8 +54,8 @@
   function answerItem(e) {
        return `
         <div class="d-flex" style="margin: 1rem">
-            <input type="radio" name="right" value="${e.id}">
-            <input type="hidden" name="answer[]" value="${e.content}">
+            <input type="radio" name="question[right]" value="${e.id}">
+            <input type="hidden" name="question[answers]][]" value="${e.content}">
             <strong>${String.fromCharCode(65 + e.id)} .</strong>
             <p>${e.content}</p>
         </div>
