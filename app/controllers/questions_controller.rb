@@ -1,7 +1,5 @@
 class QuestionsController < ApplicationController
-  def index
-    @questions = Question.all
-  end
+  before_action :validate_user, only: [:edit, :update, :destroy, :create]
 
   def show
     @lession = Lession.find_by(id: params[:id])
@@ -46,11 +44,15 @@ class QuestionsController < ApplicationController
 
   private
 
-  def set_question
-    @question = Question.find(params[:id])
-  end
-
   def question_params
     params.require(:question).permit(:content, :typeQuestion, :right, :lession_id, answers: [ ])
+  end
+
+  def validate_user
+    unless is_admin?
+      session.delete(:user_id)
+      @current_user = nil
+      redirect_to login_path
+    end
   end
 end

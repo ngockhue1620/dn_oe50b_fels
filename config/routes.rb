@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   post '/login', to: 'home#create'
   get "/logout", to: "home#destroy"
 
-  resources :answers
   resources :questions
   resources :tasks
   resources :lessions

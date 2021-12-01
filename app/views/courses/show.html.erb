@@ -12,8 +12,10 @@
             <%= form.hidden_field :course_id,  value: @course.id %>
             <%= form.submit t("users.learn_now"), class: "btn btn-outline-primary" %>
           <% end %>
-          <%= link_to t('action.edit'), edit_course_path(@course) %>
-          <%= link_to t("action.delete"), @course, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% if is_admin? %>
+            <%= link_to t('action.edit'), edit_course_path(@course) %>
+            <%= link_to t("action.delete"), @course, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
         </div>
       </div>
     </div>
@@ -24,7 +26,9 @@
         <%#= form.hidden_field  :course_id, value: @course.id %>
         <!--            <button type="submit" class="btn btn-primary"><%#= t "action.add" %> <%#= t "lessions.lession" %></button>-->
         <%# end %>
-        <%= link_to t("action.add"), lessions_courses_path(course_id: @course.id) %>
+        <% if is_admin? %>
+          <%= link_to t("action.add"), lessions_courses_path(course_id: @course.id) %>
+        <% end %>
       </div>
 
       <% if @course&.lessions.size > 0 %>
@@ -41,8 +45,10 @@
                 <td><%= lession.name %></td>
                 <td><%= lession.duration %> ngày</td>
                 <td><%= link_to t("action.show"), lession %></td>
-                <td><%= link_to t("action.edit"), edit_lession_path(lession) %></td>
-                <td><%= link_to t("action.delete"), lession, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                <% if is_admin? %>
+                  <td><%= link_to t("action.edit"), edit_lession_path(lession) %></td>
+                  <td><%= link_to t("action.delete"), lession, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                <% end %>
               </tr>
             <% end %>
             </tbody>

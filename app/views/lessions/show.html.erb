@@ -11,7 +11,9 @@
         </div>
         <div class="card-footer">
           <p>Có <%= @lession.questions.size %> Câu hỏi cho bìa học này</p>
-          <%= link_to t("question.new_question"), question_path(@lession), class: 'btn btn-primary' %>
+          <% if is_admin? %>
+            <%= link_to t("question.new_question"), question_path(@lession), class: 'btn btn-primary' %>
+          <% end %>
           <%= link_to t("exam.exam"), exam_path(@lession), class: 'btn btn-primary' %>
         </div>
       </div>
@@ -39,7 +41,9 @@
       <div style="display: flex; justify-content: space-between">
         <strong>Các Nhiện vụ của bài học</strong>
       <div style="display: flex; justify-content: flex-end">
+        <% if is_admin? %>
         <button onclick="showFormAddTask()" id="addButton" class="btn btn-primary"><%= t "action.add" %></button>
+        <% end %>
       </div>
       </div>
       <% if @lession&.tasks.size == 0 %>

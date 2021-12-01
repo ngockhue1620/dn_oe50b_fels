@@ -1,26 +1,13 @@
 class AnswersController < ApplicationController
-  def index
-    @answers = Answer.all
-  end
-
-  def show; end
-
-  def new
-    @answer = Answer.new
-  end
-
-  def edit; end
-
-  def create; end
-
-  def update; end
-
-  def destroy; end
-
+  before_action :is_admin?
   private
 
-  def set_answer
-    @answer = Answer.find(params[:id])
+  def validate_user
+    unless is_admin?
+      session.delete(:user_id)
+      @current_user = nil
+      redirect_to login_path
+    end
   end
 
   def answer_params

@@ -1,4 +1,5 @@
 class LessionsController < ApplicationController
+  before_action :validate_user, only: [:new, :create, :edit, :update, :destroy, :index]
   def index
     @lessions = Lession.paginate(page: params[:page], :per_page => 6)
   end
@@ -64,11 +65,15 @@ class LessionsController < ApplicationController
 
   private
 
-  def set_lession
-    @lession = Lession.find(params[:id])
-  end
-
   def lession_params
     params.require(:lession).permit(:name, :description, :image, :duration)
+  end
+
+  def validate_user
+    unless is_admin?
+      session.delete(:user_id)
+      @current_user = nil
+      redirect_to login_path
+    end
   end
 end

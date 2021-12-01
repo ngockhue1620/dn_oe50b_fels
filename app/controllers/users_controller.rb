@@ -1,14 +1,19 @@
 class UsersController < ApplicationController
+  before_action :validate_user, only: [:edit, :update, :destroy, :index]
   def index
     @users = User.all
   end
 
   def show
-    @user = User.find_by(id: params[:id])
-    if @user.present?
-      @user
+    if params[:id] != session[:user_id] && !is_admin?
+      validate_user
     else
-      redirect_to root_url
+      @user = User.find_by(id: params[:id])
+      if @user.present?
+        @user
+      else
+        validate_user
+      end
     end
   end
 
@@ -19,7 +24,6 @@ class UsersController < ApplicationController
   def edit; end
 
   def create
-
     @user = User.new(sign_in_param)
     @user.is_admin = false
     if @user.save
@@ -37,14 +41,17 @@ class UsersController < ApplicationController
 
   private
 
-  def set_user
-    @user = User.find(params[:id])
-  end
-
   def sign_in_param
     params.require(:user).permit(:name, :email, :user_name, :password, :password_confirmation)
   end
+
   def user_params
     params.require(:user).permit(:name)
+  end
+
+  def validate_user
+      session.delete(:user_id)
+      @current_user = nil
+      redirect_to login_path
   end
 end

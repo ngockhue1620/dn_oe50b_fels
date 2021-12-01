@@ -1,4 +1,5 @@
 class UsersCoursesController < ApplicationController
+  before_action :validate_user , only: [:destroy]
   def index
     @courses_of_user = User.find_by(id: session[:user_id])
     if @courses_of_user.present?
@@ -38,15 +39,28 @@ class UsersCoursesController < ApplicationController
 
   def destroy
     @user_course = UsersCourse.find_by(id: params[:id])
-    if @user_course.present?
-      if @course.destroy
-      flash[:success] = t "mess.success"
-      else
-        flash[:danger] = t "mess.have_error"
-      end
+    if @user_course.user_id != session[:user_id] && !is_admin?
+      validate_user
     else
-      flash[:warning] = t "courses.not_found"
+      if @user_course.present?
+        if @course.destroy
+          flash[:success] = t "mess.success"
+        else
+          flash[:danger] = t "mess.have_error"
+        end
+      else
+        flash[:warning] = t "courses.not_found"
       end
+    end
+  end
 
+  private
+
+  def validate_user
+    unless is_admin?
+      session.delete(:user_id)
+      @current_user = nil
+      redirect_to login_path
+    end
   end
 end

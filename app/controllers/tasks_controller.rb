@@ -1,16 +1,5 @@
 class TasksController < ApplicationController
-  def index
-    @tasks = Task.all
-  end
-
-  def show; end
-
-  def new
-    @task = Task.new
-  end
-
-  def edit; end
-
+  before_action :validate_user, only: [:create]
   def create
     @task = Task.new(task_params)
     if @task.save
@@ -21,16 +10,17 @@ class TasksController < ApplicationController
     end
   end
 
-  def update; end
-
-  def destroy; end
-
   private
-  def set_task
-    @task = Task.find(params[:id])
-  end
 
   def task_params
     params.require(:task).permit(:title, :description, :lession_id)
+  end
+
+  def validate_user
+    unless is_admin?
+      session.delete(:user_id)
+      @current_user = nil
+      redirect_to login_path
+    end
   end
 end

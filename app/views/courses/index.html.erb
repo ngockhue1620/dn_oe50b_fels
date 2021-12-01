@@ -9,8 +9,10 @@
         </div>
         <div style="display: flex; justify-content: space-around">
           <%= link_to t("action.show"), course %>
+          <% if is_admin? %>
           <%= link_to t("action.edit"), edit_course_path(course) %>
           <%= link_to t("action.delete"), course, method: :delete, data: { confirm: "#{course.name} sẽ bị xóa" } %>
+          <% end %>
         </div>
       </div>
 
@@ -20,4 +22,6 @@
   <%= will_paginate @courses, :container => false %>
 </div>
 <br>
-<%= link_to 'New Course', new_course_path, class: "btn " %>
+<% if is_admin? %>
+  <%= link_to t("courses.create"), new_course_path, class: "btn " %>
+<% end %>

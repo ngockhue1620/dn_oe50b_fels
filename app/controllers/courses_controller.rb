@@ -1,4 +1,5 @@
 class CoursesController < ApplicationController
+  before_action :validate_user, only: [:edit, :update, :destroy, :create]
   def index
     @courses = Course.paginate(:page => params[:page], :per_page => 6)
   end
@@ -64,5 +65,13 @@ class CoursesController < ApplicationController
 
   def course_params
     params.require(:course).permit(:name, :description, :image)
+  end
+
+  def validate_user
+    unless is_admin?
+      session.delete(:user_id)
+      @current_user = nil
+      redirect_to login_path
+    end
   end
 end

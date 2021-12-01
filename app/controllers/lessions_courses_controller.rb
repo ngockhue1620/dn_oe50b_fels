@@ -1,4 +1,5 @@
 class LessionsCoursesController < ApplicationController
+  before_action :validate_user
   def index
     @course = Course.find_by(id: params[:course_id])
     if @course.present?
@@ -36,12 +37,17 @@ class LessionsCoursesController < ApplicationController
 
   end
 
-  def update; end
-
-
   private
 
   def lessions_course_params
     params.require(:lessions_course).permit(:course_id, :lession_id)
+  end
+
+  def validate_user
+    unless is_admin?
+      session.delete(:user_id)
+      @current_user = nil
+      redirect_to login_path
+    end
   end
 end
