@@ -1,0 +1,2 @@
+module ExamsDetailsHelper
+end

@@ -12,6 +12,7 @@
         <div class="card-footer">
           <p>Có <%= @lession.questions.size %> Câu hỏi cho bìa học này</p>
           <%= link_to t("question.new_question"), question_path(@lession), class: 'btn btn-primary' %>
+          <%= link_to t("exam.exam"), exam_path(@lession), class: 'btn btn-primary' %>
         </div>
       </div>
       <div id="addTask" style="display: none">

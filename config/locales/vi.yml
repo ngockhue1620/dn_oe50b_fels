@@ -40,3 +40,5 @@ vi:
     edit: "Cập nhập"
     delete: "Xóa"
     add: "Thêm"
+  exam:
+    exam: "Thi ngay"

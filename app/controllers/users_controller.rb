@@ -19,7 +19,9 @@ class UsersController < ApplicationController
   def edit; end
 
   def create
+
     @user = User.new(sign_in_param)
+    @user.is_admin = false
     if @user.save
       flash[:success] = t "mess.sign_in_success"
       redirect_to root_path
@@ -40,7 +42,7 @@ class UsersController < ApplicationController
   end
 
   def sign_in_param
-    params.require(:user).permit(:name, :email, :user_name, :password, :password_confirmation, )
+    params.require(:user).permit(:name, :email, :user_name, :password, :password_confirmation)
   end
   def user_params
     params.require(:user).permit(:name)

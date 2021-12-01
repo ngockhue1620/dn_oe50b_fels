@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_29_090518) do
+ActiveRecord::Schema.define(version: 2021_12_01_031826) do
 
   create_table "answers", charset: "utf8", force: :cascade do |t|
     t.string "content"
@@ -27,6 +27,26 @@ ActiveRecord::Schema.define(version: 2021_11_29_090518) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "image"
+  end
+
+  create_table "exam_details", charset: "utf8", force: :cascade do |t|
+    t.bigint "question_id", null: false
+    t.integer "answer_id"
+    t.bigint "exam_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["exam_id"], name: "index_exam_details_on_exam_id"
+    t.index ["question_id"], name: "index_exam_details_on_question_id"
+  end
+
+  create_table "exams", charset: "utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.float "score"
+    t.bigint "lession_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["lession_id"], name: "index_exams_on_lession_id"
+    t.index ["user_id"], name: "index_exams_on_user_id"
   end
 
   create_table "lessions", charset: "utf8", force: :cascade do |t|
@@ -87,6 +107,10 @@ ActiveRecord::Schema.define(version: 2021_11_29_090518) do
   end
 
   add_foreign_key "answers", "questions"
+  add_foreign_key "exam_details", "exams"
+  add_foreign_key "exam_details", "questions"
+  add_foreign_key "exams", "lessions"
+  add_foreign_key "exams", "users"
   add_foreign_key "lessions_courses", "courses"
   add_foreign_key "lessions_courses", "lessions"
   add_foreign_key "questions", "lessions"

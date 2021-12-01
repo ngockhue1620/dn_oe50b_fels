@@ -1,0 +1,23 @@
+
+<h4>Bai Test <%= @lession.name %></h4>
+
+<%= form_for :exam,  url: {action: :create, controller: :exams} do |form| %>
+  <div class="container ">
+    <%= form.hidden_field :lession_id, value: @lession.id %>
+ <% @questions.each_with_index do |question, index| %>
+  <div class="card">
+    <p>Cau <%= index + 1 %>: <%= question.content %> : <%= question.id %></p>
+    <% question.answers.each_with_index do |answer, answer_index|  %>
+    <div class="d-flex " style="margin: 1rem">
+        <strong><%= (65 + answer_index).chr %></strong>
+        <input type="radio" name="exam[question][<%= question.id %>]" value="<%= answer.id %>">
+        <p><%= answer.content %> : <%= answer.id %> </p>
+    </div>
+
+    <% end %>
+  </div>
+ <% end %>
+  </div>
+
+  <%= form.submit class: 'btn btn-primary'%>
+<% end %>

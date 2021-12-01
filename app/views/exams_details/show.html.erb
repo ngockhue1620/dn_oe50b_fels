@@ -1,0 +1,17 @@
+<h3>Kết quả <%= @exam.score %></h3>
+
+  <div class="container ">
+    <% @list_question.each_with_index do |question, index| %>
+      <div class="card">
+        <p>Cau <%= index + 1 %>: <%= question.content %> </p>
+        <% question.answers.each_with_index do |answer, answer_index|  %>
+          <div class="d-flex " style="margin: 1rem">
+            <strong><%= (65 + answer_index).chr %>.</strong>
+            <p><%= answer.content %> </p>
+            <p><%= answer.is_right ? "đáp án đúng" : '' %></p>
+            <p><%= answer.id == @question_of_exam[index].answer_id.to_i ? "Phương án bạn chọn" : "" %></p>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>

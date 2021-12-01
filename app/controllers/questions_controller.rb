@@ -28,9 +28,9 @@ class QuestionsController < ApplicationController
     )
 
     if @add_question.save
-      puts(question_params[:answers])
+      puts(question_params[:right])
       question_params[:answers].each_with_index { |content, index|
-        if index == question_params[:right]
+        if index == question_params[:right].to_i
           Answer.create(content: content, is_right: true, question_id: @add_question.id)
         else
           Answer.create(content: content, is_right: false, question_id: @add_question.id)
